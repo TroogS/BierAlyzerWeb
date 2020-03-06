@@ -28,9 +28,8 @@ namespace BierAlyzer.Web.Controllers
             var model = new ArchiveModel { User = HttpContext.GetUser() };
             using (var context = ContextHelper.OpenContext())
             {
-                model.Events = context.GetUserEvents(model.User.UserId)
-                    .Where(x => x.Status == EventStatus.Closed)
-                    .ToList();
+                var userEvents = context.GetUserEvents(model.User.UserId).ToList();
+                model.Events = userEvents.Where(x => x.Status == EventStatus.Closed).ToList();
             }
             return View(model);
         }

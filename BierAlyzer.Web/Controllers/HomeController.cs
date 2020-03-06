@@ -52,7 +52,7 @@ namespace BierAlyzer.Web.Controllers
 
             using (var context = ContextHelper.OpenContext())
             {
-                model.PublicEvents = context.Event
+                model.PublicEvents = context.Event.ToList()
                     .Where(e => e.Type == EventType.Public && !context.GetUserEvents(user.UserId).Select(u => u.EventId).Contains(e.EventId))
                     .Where(e => e.Status != EventStatus.Closed)
                     .ToList();
@@ -60,15 +60,15 @@ namespace BierAlyzer.Web.Controllers
                 if (context.User.Any(u => u.UserId == user.UserId))
                 {
                     var userEvents = context.GetUserEvents(user.UserId)
-                                            .Where(e => e.Type != EventType.Hidden);
+                                            .Where(e => e.Type != EventType.Hidden).ToList();
 
                     // Still running events                       
-                    model.Events = userEvents
+                    model.Events = userEvents.ToList()
                         .Where(e => e.Status != EventStatus.Closed)
                         .ToList();
 
                     // Events that ended within the last two weeks
-                    model.RecentEvents = userEvents
+                    model.RecentEvents = userEvents.ToList()
                         .Where(e => e.Status == EventStatus.Closed)
                         .Where(e => e.End > DateTime.Now.AddDays(-14))
                         .ToList();

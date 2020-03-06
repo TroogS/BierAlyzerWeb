@@ -107,50 +107,48 @@ namespace BierAlyzerWeb
 
             app.UseWebOptimizer();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(routes =>
             {
                 #region Routes
 
                 // AccountController
-                routes.MapRoute("Login", "login", new { controller = "Account", action = "Login" });
-                routes.MapRoute("Logout", "logout", new { controller = "Account", action = "Logout" });
-                routes.MapRoute("SignUp", "signup", new { controller = "Account", action = "SignUp" });
+                routes.MapControllerRoute("Login", "login", new { controller = "Account", action = "Login" });
+                routes.MapControllerRoute("Logout", "logout", new { controller = "Account", action = "Logout" });
+                routes.MapControllerRoute("SignUp", "signup", new { controller = "Account", action = "SignUp" });
 
                 // HomeController
-                routes.MapRoute("Events", "events", new { controller = "Home", action = "Events" });
-                routes.MapRoute("Event", "event", new { controller = "Home", action = "Event" });
-                routes.MapRoute("UserProfile", "profile", new { controller = "Home", action = "UserProfile" });
-                routes.MapRoute("JoinPublicEvent", "joinpublic", new { controller = "Home", action = "JoinPublicEvent" });
-                routes.MapRoute("BookDrink", "book", new { controller = "Home", action = "BookDrink" });
-                routes.MapRoute("LeaveEvent", "leave", new { controller = "Home", action = "LeaveEvent" });
-                routes.MapRoute("UserEvents", "userevents", new { controller = "Home", action = "UserEvents" });
+                routes.MapControllerRoute("Events", "events", new { controller = "Home", action = "Events" });
+                routes.MapControllerRoute("Event", "event", new { controller = "Home", action = "Event" });
+                routes.MapControllerRoute("UserProfile", "profile", new { controller = "Home", action = "UserProfile" });
+                routes.MapControllerRoute("JoinPublicEvent", "joinpublic", new { controller = "Home", action = "JoinPublicEvent" });
+                routes.MapControllerRoute("BookDrink", "book", new { controller = "Home", action = "BookDrink" });
+                routes.MapControllerRoute("LeaveEvent", "leave", new { controller = "Home", action = "LeaveEvent" });
+                routes.MapControllerRoute("UserEvents", "userevents", new { controller = "Home", action = "UserEvents" });
 
                 // Archive Controller
-                routes.MapRoute("Archive", "archive", new { controller = "Archive", action = "Archive" });
+                routes.MapControllerRoute("Archive", "archive", new { controller = "Archive", action = "Archive" });
 
                 // ManagementController
-                routes.MapRoute("ManageEvents", "manageevents", new { controller = "Management", action = "Events" });
-                routes.MapRoute("ManageEvent", "manageevent", new { controller = "Management", action = "Event" });
-                routes.MapRoute("ManageUsers", "manageusers", new { controller = "Management", action = "Users" });
-                routes.MapRoute("ManageDrinks", "managedrinks", new { controller = "Management", action = "Drinks" });
-                routes.MapRoute("ManageDrink", "managedrink", new { controller = "Management", action = "Drink" });
-                routes.MapRoute("SetEventType", "seteventtype",
-                    new { controller = "Management", action = "SetEventType" });
-                routes.MapRoute("SetEventStatus", "seteventstatus",
-                    new { controller = "Management", action = "SetEventStatus" });
-                routes.MapRoute("ToggleDrinkVisibility", "drinkvisibility",
-                    new { controller = "Management", action = "ToggleDrinkVisibility" });
-                routes.MapRoute("ToggleUserEnabled", "UserEnabled",
-                    new { controller = "Management", action = "ToggleUserEnabled" });
+                routes.MapControllerRoute("ManageEvents", "manageevents", new { controller = "Management", action = "Events" });
+                routes.MapControllerRoute("ManageEvent", "manageevent", new { controller = "Management", action = "Event" });
+                routes.MapControllerRoute("ManageUsers", "manageusers", new { controller = "Management", action = "Users" });
+                routes.MapControllerRoute("ManageDrinks", "managedrinks", new { controller = "Management", action = "Drinks" });
+                routes.MapControllerRoute("ManageDrink", "managedrink", new { controller = "Management", action = "Drink" });
+                routes.MapControllerRoute("SetEventType", "seteventtype", new { controller = "Management", action = "SetEventType" });
+                routes.MapControllerRoute("SetEventStatus", "seteventstatus", new { controller = "Management", action = "SetEventStatus" });
+                routes.MapControllerRoute("ToggleDrinkVisibility", "drinkvisibility", new { controller = "Management", action = "ToggleDrinkVisibility" });
+                routes.MapControllerRoute("ToggleUserEnabled", "UserEnabled", new { controller = "Management", action = "ToggleUserEnabled" });
 
                 // PublicController
-                routes.MapRoute("Error", "error", new { controller = "Public", action = "Error" });
-                routes.MapRoute("Impressum", "impressum", new { controller = "Public", action = "Impressum" });
-                routes.MapRoute("Privacy", "privacy", new { controller = "Public", action = "Privacy" });
+                routes.MapControllerRoute("Error", "error", new { controller = "Public", action = "Error" });
+                routes.MapControllerRoute("Impressum", "impressum", new { controller = "Public", action = "Impressum" });
+                routes.MapControllerRoute("Privacy", "privacy", new { controller = "Public", action = "Privacy" });
 
                 // Default
-                routes.MapRoute("default", "{controller}/{action}", new { controller = "Home", action = "Events" });
-                routes.MapRoute("fallback", "{*url}", new { controller = "Home", action = "Events" });
+                routes.MapControllerRoute("default", "{controller}/{action}", new { controller = "Home", action = "Events" });
+                routes.MapControllerRoute("fallback", "{*url}", new { controller = "Home", action = "Events" });
 
                 #endregion
             });

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BierAlyzerWeb.Helper;
 using Microsoft.AspNetCore.Html;
@@ -22,11 +23,17 @@ namespace BierAlyzer.Web.Helper
             var outputOrigins = new List<string>(SharedProperties.KnownOrigins);
             using (var context = ContextHelper.OpenContext())
             {
-                var databaseOrigins = context.User.Select(u => u.Origin).ToList();
+                var databaseOrigins = context.User.Select(u => u.Origin).Where(x => !string.IsNullOrWhiteSpace(x));
 
                 foreach (var databaseOrigin in databaseOrigins)
-                    if (outputOrigins.All(o => o.Trim().ToLower() != databaseOrigin.Trim().ToLower()))
+                {
+                    if (!outputOrigins.Any(oo =>
+                        string.Equals(oo.Trim(), databaseOrigin.Trim(), StringComparison.InvariantCultureIgnoreCase)))
+                    {
                         outputOrigins.Add(databaseOrigin.Trim());
+                    }
+                }
+                    
             }
 
             var joinedNames = outputOrigins.Select(x => string.Format("'{0}'", x)).Aggregate((a, b) => a + ", " + b);

@@ -6,6 +6,7 @@ using BierAlyzer.Web.Helper;
 using BierAlyzerWeb;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace BierAlyzer.Web
 {
@@ -47,15 +48,15 @@ namespace BierAlyzer.Web
                 #endregion
             }
 
-            BuildWebHost(args).Run();
+            var host = CreateHostBuilder(args).Build();
+            host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://*:5000")
-                .UseStartup<Startup>()
-                .Build();
-        }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
