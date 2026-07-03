@@ -7,9 +7,40 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/BierAlyzerWeb/BierAlyzerWeb.csproj"
+                "${workspaceFolder}/BierAlyzer.Web/BierAlyzer.Web.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "statusbar": {
+                    "label": "$(tools) Build",
+                    "color": "#3399FF",
+                    "detail": "Build the BierAlyzer Web application",
+                    "hide": false
+                }
+            }
+        },
+        {
+            "label": "run",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/BierAlyzer.Web/BierAlyzer.Web.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "options": {
+                "statusbar": {
+                    "label": "$(play) Run",
+                    "color": "#4AF626",
+                    "detail": "Run the BierAlyzer Web application",
+                    "hide": false
+                }
+            }
         }
     ]
 }
